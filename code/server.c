@@ -52,7 +52,7 @@ int main(void) {
   printf("socket retrieve success\n");
   
   memset(&serv_addr, '0', sizeof(serv_addr));
-  sendBuff = malloc(sizeof(char)*(1024));
+  sendBuff = calloc(1024,sizeof(char));
       
   serv_addr.sin_family = AF_INET;    
   serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
@@ -65,9 +65,11 @@ int main(void) {
   	return -1;
   } 
     
-  char message[1024];
-	readFile("file", message);
-	
+  char message[1024] = "whats good homeboy";
+	//readFile("file", message);
+	printf("%s\n", message);	
+
+
   while(1) {      
   	connfd = accept(listenfd, (struct sockaddr*)NULL ,NULL); // accept awaiting request
   

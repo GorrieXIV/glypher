@@ -11,7 +11,7 @@
 
 //writing a message to auxillary file, preparing for encryption
 void writeToFile (char* file, char* message) {
-	FILE *f_dst = fopen(file, "wb");
+	FILE *f_dst = fopen(file, "w");
 	if(f_dst == NULL) {
   	printf("ERROR - Failed to open file for writing\n");
     exit(1);
@@ -33,7 +33,7 @@ int main(void) {
   char * recvBuff;
   struct sockaddr_in serv_addr;
  
-  recvBuff = malloc(sizeof(char)*(1024));
+  recvBuff[1024]; //= malloc(sizeof(char)*(1024));
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0) {
 		printf("\n Error : Could not create socket \n");
     return 1;
@@ -60,6 +60,7 @@ int main(void) {
   	printf("\n Read Error \n");
   }
 
+	printf("%s", recvBuff);
 	writeToFile("temp", recvBuff);	 
 	free(recvBuff);
   return 0;
